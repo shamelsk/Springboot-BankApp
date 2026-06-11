@@ -18,7 +18,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/LondheShubham153/Springboot-BankApp.git","DevOps")
+                    code_checkout("https://github.com/shamelsk/Springboot-BankApp.git","DevOps")
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
                 script{
                     dir('kubernetes'){
                         sh """
-                            sed -i -e 's|trainwithshubham/bankapp-eks:.*|trainwithshubham/bankapp-eks:${params.DOCKER_TAG}|g' bankapp-deployment.yaml
+                            sed -i -e 's|shamel1012/springboot-bankapp:.*|shamel1012/springboot-bankapp:${params.DOCKER_TAG}|g' bankapp-deployment.yaml
                         """
                     }
                 }
@@ -59,7 +59,7 @@ pipeline {
                         git commit -m "Updated K8s Deployment Docker Image Version"
                         
                         echo "Pushing changes to github: "
-                        git push https://github.com/LondheShubham153/Springboot-BankApp.git DevOps
+                        git push https://github.com/shamelsk/Springboot-BankApp.git DevOps
                     '''
                     }
                 }
@@ -70,7 +70,7 @@ pipeline {
         always {
             script {
                 emailext attachLog: true,
-                from: 'trainwithshubham@gmail.com',
+                from: 'shamelsk10@gmail.com',
                 subject: "BankApp Application has been updated and deployed - '${currentBuild.result}'",
                 body: """
                     <html>
@@ -87,7 +87,7 @@ pipeline {
                     </body>
                     </html>
             """,
-            to: 'trainwithshubham@gmail.com',
+            to: 'shamelsk10@gmail.com',
             mimeType: 'text/html'
             }
         }

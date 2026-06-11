@@ -23,7 +23,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/LondheShubham153/Springboot-BankApp.git","DevOps")
+                    code_checkout("https://github.com/shamelsk/Springboot-BankApp.git","DevOps")
                 }
             }
         }
