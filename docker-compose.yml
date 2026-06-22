@@ -2,7 +2,7 @@ version: "3.8"
 services:
   mysql:
     image: mysql:latest
-    container_name: mysql
+    container_name: mysql-bankapp
     environment:
       - MYSQL_ROOT_PASSWORD=Test@123
       - MYSQL_DATABASE=BankDB
@@ -25,7 +25,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/BankDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - SPRING_DATASOURCE_PASSWORD=Test@123
     ports:
-      - "8080:8080"
+      - "5003:8080"
     depends_on:
       mysql:
         condition: service_healthy
@@ -33,7 +33,7 @@ services:
       - bankapp
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8081/actuator/health || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
