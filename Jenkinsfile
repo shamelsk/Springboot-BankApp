@@ -21,12 +21,15 @@ pipeline {
         }
         
         stage('Git: Code Checkout') {
-            steps {
-                script{
-                    code_checkout("https://github.com/shamelsk/Springboot-BankApp.git","DevOps")
-                }
-            }
+    steps {
+        script {
+            clone(
+                "https://github.com/shamelsk/Springboot-BankApp.git",
+                "DevOps"
+            )
         }
+    }
+}
         
         stage("Trivy: Filesystem scan"){
             steps{
@@ -44,13 +47,13 @@ pipeline {
             }
         }
         
-        stage("SonarQube: Code Analysis"){
-            steps{
-                script{
-                    sonarqube_analysis("Sonar","bankapp","bankapp")
-                }
-            }
+        stage("SonarQube: Code Analysis") {
+    steps {
+        script {
+            sonarqube_scan()
         }
+    }
+}
         
         stage("SonarQube: Code Quality Gates"){
             steps{
@@ -60,21 +63,29 @@ pipeline {
             }
         }
 
-        stage("Docker: Build Images"){
-            steps{
-                script{
-                    docker_build("bankapp","${params.DOCKER_TAG}","madhupdevops")
-                }
-            }
+        stage('Docker: Build Image') {
+    steps {
+        script {
+            docker_build(
+                imageName: "bankapp",
+                imageTag: params.DOCKER_TAG
+            )
         }
+    }
+}
         
-        stage("Docker: Push to DockerHub"){
-            steps{
-                script{
-                    docker_push("bankapp","${params.DOCKER_TAG}","madhupdevops")
-                }
-            }
+        stage('Docker: Push to DockerHub') {
+    steps {
+        script {
+            docker_push(
+                sourceImage: "bankapp",
+                imageName: "shamel1012/springboot-bankapp",
+                imageTag: params.DOCKER_TAG,
+                credentialsId: "dockerHubCred"
+            )
         }
+    }
+}
     }
     post{
         success{
