@@ -285,7 +285,7 @@ sudo apt-get install trivy -y
   argocd cluster add Madhup@bankapp.us-west-1.eksctl.io --name bankapp-eks-cluster
   ```
   > [!Tip]
-  > Madhup@bankapp.us-west-1.eksctl.io --> This should be your EKS Cluster Name.
+  > Shamel@bankapp.us-west-1.eksctl.io --> This should be your EKS Cluster Name.
 
  ![image](https://github.com/user-attachments/assets/1061fe66-17ec-47b7-9d2e-371f58d3fd90)
 
