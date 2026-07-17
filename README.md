@@ -33,7 +33,7 @@ sudo su
 
 - <b id="EKS">Create EKS Cluster on AWS</b>
 - IAM user with **access keys and secret access keys**
-- AWSCLI should be configured (<a href="https://github.com/DevMadhup/DevOps-Tools-Installations/blob/main/AWSCLI/AWSCLI.sh">Setup AWSCLI</a>)
+- AWSCLI should be configured 
   ```bash
   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   sudo apt install unzip
